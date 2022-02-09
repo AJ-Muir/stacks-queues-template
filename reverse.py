@@ -11,18 +11,15 @@ from Stack import Stack
 # Return a new queue in reverse order
 # Hint: can use a stack to help
 def reverse(q_orig):
-    q_new = Queue([])
-    s_new = Stack([])
-    i=0
-    while i<len(q_orig):
-        s_new.push(q_orig[i])
-        i+=1
-    q_orig.clear()
-    j=0
-    while j<len(s_new):
-        q_new.enq(s_new[i])
-        j+=1
-    return q_new
+    q_new = Queue([])                   # Queue that will be returned
+    s_new = Stack([])                   # Stack to help reverse Queue
+    while q_orig.is_empty() == False:   # Will q_orig has elements left
+        s_new.push(q_orig.deq())        # q_orig deques into s_new (pushes)
+    q_orig.clear()                      # destroys q_orig
+    while s_new.is_empty() == False:
+        q_new.enq(s_new.pop())          # s_new pops into q_new (enqueues)
+    s_new.clear()                       # destroys s_new
+    return q_new                        
 
 def main():
     q = Queue(list(range(1, 5)))
